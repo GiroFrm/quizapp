@@ -47,7 +47,7 @@ const Questions = () => {
 
   const [nextIndex, setNextIndex] = useState(0);
 
-  const [clickCounter, setClickCounter] = useState(0)
+  
  
 
    useEffect(()=>{
@@ -80,6 +80,7 @@ const Questions = () => {
     );
   }
   const handleClickAnswer = (e) => {
+    if(nextIndex<=0) {
     const question = response.results[questionIndex];
     if (e.target.textContent === question.correct_answer) {
     
@@ -91,23 +92,23 @@ const Questions = () => {
     } else {
       navigation("/results");
     }
-    const newClick = clickCounter + 1;
-    setClickCounter(newClick);
+    
+  }
   };
 
   const handlePrevAnswer =(e) => {
     if (questionIndex > 0) {
       setNextIndex(nextIndex + 1)
       setQuestionIndex(questionIndex - 1);
+      console.log("nextIndex From prev is"+nextIndex);
       
     }
   }
 
   const handleNextAnswer =(e) => {
-    if ( nextIndex>0 && (questionIndex + 1 < response.results.length 
-                     && (nextIndex<=clickCounter))) {
+    if  (nextIndex>0 && questionIndex + 1 < response.results.length ) {
       setNextIndex( nextIndex - 1 );
-      setQuestionIndex(questionIndex + 1);
+      setQuestionIndex(questionIndex + 1); 
     }
   }
 
